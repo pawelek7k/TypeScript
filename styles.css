@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+body {
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+li {
+    list-style: none;
+}
+
+hr {
+    border-color: black;
+    border-radius: 20px;
+}
+
+.container {
+    background-color: rgb(17, 17, 17);
+    width: 300px;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;;
+    justify-content: center;
+    padding: 40px;
+    gap: 10px;
+    margin-top: 50px;
+    box-shadow: -1px 7px 22px -2px rgba(0,0,0,0.75);
+-webkit-box-shadow: -1px 7px 22px -2px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 7px 22px -2px rgba(0,0,0,0.75);
+}
+
+button {
+    padding: 10px 40px;
+    border-radius: 25px;
+    border: none;
+    background-color: rgb(13, 13, 13);
+    color: aliceblue;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 250ms;
+    border: 1px solid rgb(5, 5, 5);
+    margin-top: 10px;
+    width: 300px;
+
+}
+
+button:hover {
+    box-shadow: -1px 10px 10px -3px rgba(62, 18, 81, 0.75);
+-webkit-box-shadow: -1px 10px 10px -3px rgba(62, 18, 81, 0.75);
+-moz-box-shadow: -1px 10px 10px -3px rgba(62, 18, 81, 0.75);
+}
+
+label {
+    color: white;
+}
+
+input {
+    background-color: rgb(13, 13, 13);
+    border: none;
+    border: 1px solid rgb(5, 5, 5);
+    padding: 10px 20px;
+    color: white;
+    border-radius: 25px;
+    width: 265px;
+}
+
+*:focus {
+    outline: none;
+  }
+
+input:focus {
+    outline: 1px solid rgb(54, 53, 53);
+  }
+
+  .tasks {
+    position: relative;
+  }
+
+  .tasks > li {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+
+  }
+
+  .tasks input {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+.tasks label {
+    max-width: 80%;
+}
+
+.gym label {
+    color: rgb(0, 102, 255);
+}
+
+.hobby label {
+    color: pink;
+}
+
+.work label {
+    color: blueviolet;
+}
+
+.categories {
+    position: relative;
+}
+
+.categories li {
+    display: flex;
+    align-items: center;
+
+}
+
+.categories input {
+    position: absolute;
+    right: -110px;
+}
