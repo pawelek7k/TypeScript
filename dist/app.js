@@ -1,81 +1,57 @@
+import { TaskClass } from "./classes/tasks.js";
+import { render as renderCategories } from "./helpers/render-categories.js";
+import renderTasks from "./helpers/render-tasks.js";
+import { Category } from "./types/types.js";
 const taskNameInputElement = document.querySelector("#name");
 const addButtonElement = document.querySelector("button");
+const tasksContainerElement = document.querySelector(".tasks");
 const categoriesContainerElement = document.querySelector(".categories");
 let selectedCategory;
-const categories = ["general", "work", "gym", "hobby"];
+const categories = [
+    Category.GENERAL,
+    Category.WORK,
+    Category.GYM,
+    Category.HOBBY,
+    Category.SOCIAL,
+];
 const tasks = [
     {
-        title: "wyrzucić śmieci",
+        name: "Wyrzucić śmieci",
         done: false,
-        category: "general"
+        category: Category.HOBBY,
     },
     {
-        title: "Pójść na siłownie",
+        name: "Pójść na siłkę",
         done: true,
-        category: "gym"
-    }
+        category: Category.GYM,
+    },
+    {
+        name: "Nakarmić koty",
+        done: false,
+        category: Category.WORK,
+    },
 ];
-const renderCategories = () => {
-    categories.forEach((category) => {
-        const categoryElement = document.createElement("li");
-        const radioInputElement = document.createElement("input");
-        radioInputElement.type = "radio";
-        radioInputElement.name = "category";
-        radioInputElement.value = category;
-        radioInputElement.id = `category-${category}`;
-        radioInputElement.addEventListener("change", () => {
-            selectedCategory = category;
-        });
-        const labelElement = document.createElement("label");
-        labelElement.setAttribute("for", `category-${category}`);
-        labelElement.innerText = category;
-        categoryElement.appendChild(radioInputElement);
-        categoryElement.appendChild(labelElement);
-        categoriesContainerElement.appendChild(categoryElement);
-    });
-};
-const tasksContainerElement = document.querySelector(".tasks");
-const render = () => {
-    tasksContainerElement.innerHTML = '';
-    tasks.forEach((task, index) => {
-        const taskElement = document.createElement("li");
-        if (task.category) {
-            taskElement.classList.add(task.category);
-        }
-        const labelElement = document.createElement("label");
-        const id = `task-${index}`;
-        labelElement.innerText = task.title;
-        labelElement.setAttribute("for", id);
-        const checkboxElement = document.createElement("input");
-        checkboxElement.type = "checkbox";
-        checkboxElement.name = task.title;
-        checkboxElement.id = id;
-        checkboxElement.checked = task.done;
-        checkboxElement.addEventListener("change", () => {
-            task.done = !task.done;
-        });
-        taskElement.appendChild(labelElement);
-        taskElement.appendChild(checkboxElement);
-        tasksContainerElement.appendChild(taskElement);
-    });
-};
 const addTask = (task) => {
     tasks.push(task);
 };
+const updateSelectedCategory = (newCategory) => {
+    selectedCategory = newCategory;
+};
 addButtonElement.addEventListener("click", (event) => {
-    const selectedRadioElement = document.querySelector("input[type='radio']:checked");
     event.preventDefault();
-    if (taskNameInputElement.value.trim() !== "") {
-        addTask({
-            title: taskNameInputElement.value,
-            done: false,
-            category: selectedCategory
-        });
-        render();
-        taskNameInputElement.value = "";
-    }
+    addTask({
+        name: taskNameInputElement.value,
+        done: false,
+        category: selectedCategory,
+    });
+    renderTasks(tasks, tasksContainerElement);
 });
-addTask({ title: "specjalne zadania od szefa", category: "gym", done: false });
-renderCategories();
-render();
-export {};
+const task = ["zrobić klatę", Category.GYM, false];
+const taskName = task[0];
+const taskCategory = task[1];
+const taskDoneStatus = task[2];
+addTask({ name: taskName, category: taskCategory, done: taskDoneStatus });
+renderCategories(categories, categoriesContainerElement, updateSelectedCategory);
+renderTasks(tasks, tasksContainerElement);
+const taskClassInstance = new TaskClass("zadanie", false, Category.GYM);
+taskClassInstance.logCreationDate();
