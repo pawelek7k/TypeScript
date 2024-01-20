@@ -31,6 +31,8 @@ const render = (tasks: Task[], tasksContainerElement: HTMLElement) => {
             tasksContainerElement.appendChild(taskElement);
         }
     });
+    const mainInput = document.querySelector(".input-element")
+    mainInput.value = "";
 };
 
 export default render;
